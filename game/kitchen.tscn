@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cy4tuhe61q6xl"]
+
+[ext_resource type="PackedScene" uid="uid://mgp02mkor0at" path="res://scenes/hand.tscn" id="1_vloss"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ipk1y"]
+
+[node name="Kitchen" type="Node3D" unique_id=1243928712]
+
+[node name="Stove" type="MeshInstance3D" parent="." unique_id=1732584394]
+mesh = SubResource("BoxMesh_ipk1y")
+
+[node name="Hand" parent="." unique_id=2124337969 instance=ExtResource("1_vloss")]
