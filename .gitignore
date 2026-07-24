@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Godot 4+ specific ignores
+.godot/
+/android/
+
 # User-specific files
 *.rsuser
 *.suo
