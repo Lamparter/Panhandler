@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://mgp02mkor0at"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1gd3j"]
+
 [node name="Hand" type="Node3D" unique_id=2124337969]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1328255663]
+mesh = SubResource("CapsuleMesh_1gd3j")

@@ -9,4 +9,8 @@
 [node name="Stove" type="MeshInstance3D" parent="." unique_id=1732584394]
 mesh = SubResource("BoxMesh_ipk1y")
 
-[node name="Hand" parent="." unique_id=2124337969 instance=ExtResource("1_vloss")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1274084394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7723432, -0.22309542)
+
+[node name="Hand" parent="Camera3D" unique_id=2124337969 instance=ExtResource("1_vloss")]
+transform = Transform3D(1, 0, 0, 0, -0.73956066, 0.67309004, 0, -0.67309004, -0.73956066, 0, -0.07622576, -1.6713649)
