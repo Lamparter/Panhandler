@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -12,8 +13,20 @@ public class StreamedListener : IDisposable
 
 	private readonly object _lock = new();
 	private float _qx, _qy, _qz, _qw;
+	private IPEndPoint? _connectedWatchEndPoint;
 
-	public StreamedListener(int port)
+	public IPEndPoint? ConnectedWatchEndpoint
+	{
+		get
+		{
+			lock (_lock)
+			{
+				return _connectedWatchEndPoint;
+			}
+		}
+	}
+
+	public StreamedListener(int port = 12345)
 	{
 		_listenPort = port;
 	}
@@ -30,6 +43,8 @@ public class StreamedListener : IDisposable
 
 	private async Task ListenAsync(CancellationToken cancellationToken)
 	{
+		IPEndPoint remoteEndPoint = new(IPAddress.Any, _listenPort);
+
 		while (!cancellationToken.IsCancellationRequested && _udpListener != null)
 		{
 			try
@@ -50,6 +65,8 @@ public class StreamedListener : IDisposable
 						_qy = y;
 						_qz = z;
 						_qw = w;
+
+						_connectedWatchEndPoint = result.RemoteEndPoint;
 					}
 				}
 			}

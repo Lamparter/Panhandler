@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using Android.App;
@@ -11,8 +12,7 @@ namespace Riverside.MotionTracking.BodySensor;
 
 public class MotionTrackingService : Service, ISensorEventListener
 {
-	// change later
-	private const string TargetIp = "";
+	private const string TargetIp = "255.255.255.255"; // entire network !!
 	private const int TargetPort = 12345;
 
 	private SensorManager? _sensorManager;
@@ -25,7 +25,10 @@ public class MotionTrackingService : Service, ISensorEventListener
 	{
 		_sensorManager = (SensorManager?)GetSystemService(SensorService);
 		_rotationVectorSensor = _sensorManager?.GetDefaultSensor(SensorType.RotationVector);
-		_udpClient = new();
+		_udpClient = new()
+		{
+			EnableBroadcast = true
+		};
 
 		if (_sensorManager != null && _rotationVectorSensor != null)
 			_sensorManager.RegisterListener(this, _rotationVectorSensor, SensorDelay.Game); // ~ 50 Hz
