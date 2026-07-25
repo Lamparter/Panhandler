@@ -7,23 +7,25 @@ namespace Riverside.MotionTracking.ConsoleTest;
 
 internal static class Program
 {
+	private const int Port = 12345;
+
 	private static async Task Main()
 	{
-		Console.Title = "Riverside Motion Tracking - Test Host";
+		Console.Title = "\"Riverside.MotionTracking\" SDK";
 		Console.ForegroundColor = ConsoleColor.Cyan;
-		Console.WriteLine("==================================================");
+		Console.WriteLine("================================================");
 		Console.WriteLine("  STARTING MOTION TRACKING NETWORK LISTENER...   ");
-		Console.WriteLine("==================================================");
+		Console.WriteLine("================================================");
 		Console.ResetColor();
 
-		using var listener = new StreamedListener(12345);
+		using var listener = new StreamedListener(Port);
 		listener.Start();
 
-		Console.WriteLine("\n[Listening] Waiting for Pixel Watch data on UDP port 12345...");
+		Console.WriteLine($"\n[Listening] Waiting for Pixel Watch data on UDP port {Port}...");
 		Console.ForegroundColor = ConsoleColor.DarkGray;
 		Console.WriteLine("Tip: If broadcast packets don't arrive, enter your PC's IP in the watch app.");
 		Console.WriteLine("     Ensure the watch and PC are on the same network / hotspot.");
-		Console.WriteLine("     Allow 'Riverside.MotionTracking.Console' through Windows Firewall for UDP 12345.");
+		Console.WriteLine($"     Allow 'Riverside.MotionTracking.Console' through Windows Firewall for UDP {Port}.");
 		Console.WriteLine("Press [ESC] at any time to exit the test runner.\n");
 		Console.ResetColor();
 
@@ -76,7 +78,7 @@ internal static class Program
 				if (waitingTicks % 30 == 1)
 				{
 					Console.ForegroundColor = ConsoleColor.DarkGray;
-					Console.Write($"\r[Waiting {spinner[(waitingTicks / 30) % spinner.Length]}] No watch packets yet (UDP 12345)...            ");
+					Console.Write($"\r[Waiting {spinner[(waitingTicks / 30) % spinner.Length]}] No watch packets yet (UDP {Port})...            ");
 					Console.ResetColor();
 				}
 			}
