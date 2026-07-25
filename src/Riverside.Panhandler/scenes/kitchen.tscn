@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cy4tuhe61q6xl"]
+
+[ext_resource type="PackedScene" uid="uid://mgp02mkor0at" path="res://scenes/hand.tscn" id="1_vloss"]
+[ext_resource type="PackedScene" uid="uid://87mjqlpc521e" path="res://scenes/pancake.tscn" id="2_ipk1y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ipk1y"]
+
+[node name="Kitchen" type="Node3D" unique_id=1243928712]
+
+[node name="Stove" type="MeshInstance3D" parent="." unique_id=1732584394]
+mesh = SubResource("BoxMesh_ipk1y")
+
+[node name="Pancake" parent="." unique_id=1080411880 instance=ExtResource("2_ipk1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8345554, 1.7584045, -0.62098885)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=284066822]
+transform = Transform3D(1, 0, 0, 0, 0.11907979, 0.9928847, 0, -0.9928847, 0.11907979, 0, 5, 0)
+light_color = Color(1, 1, 0.72156864, 1)
+light_energy = 5.985
+
+[node name="player" type="Node3D" parent="." unique_id=1086976477]
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=1274084394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34396172, 2.1192327, 2.6263633)
+
+[node name="Hand" parent="player" unique_id=2124337969 instance=ExtResource("1_vloss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2868646, 1.0246162, 1.4124736)
