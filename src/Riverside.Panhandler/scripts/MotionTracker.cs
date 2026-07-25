@@ -18,6 +18,18 @@ public partial class MotionTracker : Node
 	[Export]
 	public bool AutoStart { get; set; } = true;
 
+	[Export]
+	public Vector3 WatchXAxisInGodot { get; set; } = Vector3.Right;
+
+	[Export]
+	public Vector3 WatchYAxisInGodot { get; set; } = Vector3.Forward;
+
+	[Export]
+	public Vector3 WatchZAxisInGodot { get; set; } = Vector3.Up;
+
+	[Export]
+	public Quaternion CalibrationOffset { get; set; } = Quaternion.Identity;
+
 	private StreamedListener? _listener;
 
 	public override void _Ready()
@@ -35,8 +47,43 @@ public partial class MotionTracker : Node
 
 		(float x, float y, float z, float w) = _listener.GetLatestRotation();
 
-		Quaternion rotation = new(x, y, z, w);
-		EmitSignal(SignalName.QuaternionUpdated, rotation);
+		Quaternion watchRotation = new(x, y, z, w);
+		if (watchRotation.LengthSquared() < 0.0001f)
+			return;
+
+		Quaternion godotRotation = RemapWatchToGodot(watchRotation.Normalized());
+		godotRotation = CalibrationOffset * godotRotation;
+
+		EmitSignal(SignalName.QuaternionUpdated, godotRotation);
+	}
+
+	private Quaternion RemapWatchToGodot(Quaternion watchRotation)
+	{
+		Basis watchBasisInGodot = new(WatchXAxisInGodot, WatchYAxisInGodot, WatchZAxisInGodot);
+		watchBasisInGodot = watchBasisInGodot.Orthonormalized();
+
+		if (Mathf.IsZeroApprox(watchBasisInGodot.Determinant()))
+		{
+			GD.PushWarning("MotionTracker: watch axis basis is degenerate; skipping remap.");
+			return watchRotation;
+		}
+
+		Quaternion remap = watchBasisInGodot.GetRotationQuaternion();
+		return remap * watchRotation * remap.Inverse();
+	}
+
+	public void Calibrate()
+	{
+		if (_listener == null)
+			return;
+
+		(float x, float y, float z, float w) = _listener.GetLatestRotation();
+		Quaternion watchRotation = new(x, y, z, w);
+		if (watchRotation.LengthSquared() < 0.0001f)
+			return;
+
+		CalibrationOffset = RemapWatchToGodot(watchRotation.Normalized()).Inverse();
+		GD.Print($"MotionTracker: calibration offset set to {CalibrationOffset}");
 	}
 
 	public override void _ExitTree()
