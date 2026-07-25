@@ -65,4 +65,9 @@ public partial class HandController : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	static public void OnMotionTrackerUpdate(Quaternion quaternion)
+	{
+		GD.Print($"Received quaternion: {quaternion}");
+	}
 }

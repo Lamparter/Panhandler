@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://mgp02mkor0at"]
 
 [ext_resource type="Script" uid="uid://db2lpbpoxkver" path="res://scripts/HandController.cs" id="1_eyfoh"]
+[ext_resource type="Script" uid="uid://ccsic5fc6micm" path="res://scripts/MotionTracker.cs" id="2_cmdsa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1gd3j"]
 
@@ -90,3 +91,9 @@ size = Vector3(0.98461914, 0.61120605, 1.146698)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1545973187]
 transform = Transform3D(1, 0, 0, 0, 0.14703259, 0.9891316, 0, -0.9891316, 0.14703259, 0, 3.4293597, -0.42829943)
+
+[node name="MotionTracker" type="Node" parent="." unique_id=132031381]
+script = ExtResource("2_cmdsa")
+metadata/_custom_type_script = "uid://ccsic5fc6micm"
+
+[connection signal="QuaternionUpdated" from="MotionTracker" to="HandBody" method="OnMotionTrackerUpdate"]
