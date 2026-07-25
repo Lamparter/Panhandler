@@ -28,10 +28,7 @@ size = Vector2(0.2, 0.2)
 [node name="LiquidDispenser" unique_id=1045665151 instance=ExtResource("1_b8tge")]
 script = ExtResource("2_mkwbu")
 
-[node name="SubViewport" type="SubViewport" parent="." index="3" unique_id=1007399381]
-transparent_bg = true
-
-[node name="LiquidEmitter" type="GPUParticles3D" parent="SubViewport" index="0" unique_id=675137013]
+[node name="LiquidEmitter" type="GPUParticles3D" parent="." index="3" unique_id=675137013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0186559, 0)
 amount = 500
 process_material = SubResource("ParticleProcessMaterial_b8tge")

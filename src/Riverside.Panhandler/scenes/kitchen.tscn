@@ -64,4 +64,4 @@ environment = SubResource("Environment_bems3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8210218, 3.5223966, -0.57086277)
 
 [node name="LiquidDispenser" parent="." unique_id=1264335689 instance=ExtResource("5_v3ycp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4700477, -1.8163035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4700477, -0.21916175)
