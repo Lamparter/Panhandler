@@ -5,6 +5,7 @@
 
 # Custom files
 *.sln
+*.slnlaunch
 
 # Godot 4+ specific ignores
 .godot/
