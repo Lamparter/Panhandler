@@ -6,14 +6,30 @@
 	android:layout_height="match_parent"
 	android:padding="@dimen/box_inset_layout_padding"
 	tools:deviceIds="wear">
-	<FrameLayout
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:padding="@dimen/inner_frame_layout_padding"
+		android:orientation="vertical"
+		android:gravity="center"
 		app:boxedEdges="all">
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
 			android:text="@string/app_text" />
-	</FrameLayout>
+		<EditText
+			android:id="@+id/targetIpEditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="@string/target_ip_hint"
+			android:inputType="textUri|textNoSuggestions"
+			android:gravity="center"
+			android:textSize="12sp" />
+		<Button
+			android:id="@+id/startButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/start_tracking" />
+	</LinearLayout>
 </androidx.wear.widget.BoxInsetLayout>

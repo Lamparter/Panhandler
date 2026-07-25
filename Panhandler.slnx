@@ -2,5 +2,6 @@
 	<Project Path="src/Riverside.MotionTracking.BodySensor/Riverside.MotionTracking.BodySensor.csproj">
 		<Deploy />
 	</Project>
+	<Project Path="src/Riverside.MotionTracking.Console/Riverside.MotionTracking.Console.csproj" Id="2f9d6320-6508-44d9-bace-511fa42846a5" />
 	<Project Path="src/Riverside.MotionTracking.StreamedListener/Riverside.MotionTracking.StreamedListener.csproj" />
 </Solution>

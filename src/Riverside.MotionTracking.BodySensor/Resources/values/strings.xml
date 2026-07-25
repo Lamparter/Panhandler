@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Riverside.MotionTracking.BodySensor</string>
-	<!--
-	This string is used for square devices and overridden by hello_world in
-	values-round/strings.xml for round devices.
-	-->
-	<string name="app_text">Hello, Android Wear!</string>
+	<string name="app_text">Motion Tracker</string>
+	<string name="target_ip_hint">PC IP (or blank for broadcast)</string>
+	<string name="start_tracking">Start</string>
 </resources>

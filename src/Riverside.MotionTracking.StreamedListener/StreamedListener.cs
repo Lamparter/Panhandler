@@ -12,10 +12,10 @@ public class StreamedListener : IDisposable
 	private bool _isDisposed;
 
 	private readonly object _lock = new();
-	private float _qx, _qy, _qz, _qw;
+	private float _x, _y, _z, _w;
 	private IPEndPoint? _connectedWatchEndPoint;
 
-	public IPEndPoint? ConnectedWatchEndpoint
+	public IPEndPoint? ConnectedWatchEndPoint
 	{
 		get
 		{
@@ -35,7 +35,14 @@ public class StreamedListener : IDisposable
 	{
 		if (_udpListener != null) return;
 
-		_udpListener = new(_listenPort);
+		_udpListener = new()
+		{
+			ExclusiveAddressUse = false
+		};
+
+		_udpListener.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+		_udpListener.Client.Bind(new IPEndPoint(IPAddress.Any, _listenPort));
+
 		_cts = new();
 
 		Task.Run(() => ListenAsync(_cts.Token), _cts.Token);
@@ -43,7 +50,8 @@ public class StreamedListener : IDisposable
 
 	private async Task ListenAsync(CancellationToken cancellationToken)
 	{
-		IPEndPoint remoteEndPoint = new(IPAddress.Any, _listenPort);
+		IPEndPoint localEndPoint = (IPEndPoint?)_udpListener?.Client.LocalEndPoint ?? new IPEndPoint(IPAddress.Any, _listenPort);
+		Console.WriteLine($"[Listener] Bound to {localEndPoint}. Waiting for watch packets...");
 
 		while (!cancellationToken.IsCancellationRequested && _udpListener != null)
 		{
@@ -51,38 +59,52 @@ public class StreamedListener : IDisposable
 			{
 				UdpReceiveResult result = await _udpListener.ReceiveAsync(cancellationToken);
 				string payload = Encoding.UTF8.GetString(result.Buffer);
+				Console.WriteLine($"[Raw] {payload} <- {result.RemoteEndPoint}");
 
-				string[] tokens = payload.Split(',');
-				if (tokens.Length >= 4 &&
-					float.TryParse(tokens[0], out float x) &&
-					float.TryParse(tokens[1], out float y) &&
-					float.TryParse(tokens[2], out float z) &&
-					float.TryParse(tokens[3], out float w))
+				if (TryParsePayload(payload, out float x, out float y, out float z, out float w))
 				{
 					lock (_lock)
 					{
-						_qx = x;
-						_qy = y;
-						_qz = z;
-						_qw = w;
+						_x = x;
+						_y = y;
+						_z = z;
+						_w = w;
 
 						_connectedWatchEndPoint = result.RemoteEndPoint;
 					}
+				}
+				else
+				{
+					Console.WriteLine($"[Parse] Ignored malformed payload: {payload}");
 				}
 			}
 			catch (OperationCanceledException) { break; }
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				Console.WriteLine($"[Listener Error] {ex.GetType().Name}: {ex.Message}");
 			}
 		}
+	}
+
+	private static bool TryParsePayload(string payload, out float x, out float y, out float z, out float w)
+	{
+		x = y = z = w = 0;
+
+		string[] tokens = payload.Split(',');
+		if (tokens.Length != 4)
+			return false;
+
+		return float.TryParse(tokens[0], out x) &&
+			   float.TryParse(tokens[1], out y) &&
+			   float.TryParse(tokens[2], out z) &&
+			   float.TryParse(tokens[3], out w);
 	}
 
 	public (float x, float y, float z, float w) GetLatestRotation()
 	{
 		lock (_lock)
 		{
-			return (_qx, _qy, _qz, _qw);
+			return (_x, _y, _z, _w);
 		}
 	}
 

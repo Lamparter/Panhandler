@@ -9,6 +9,8 @@
 		<ApplicationVersion>1</ApplicationVersion>
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);XA4218</MSBuildWarningsAsMessages>
+		<RuntimeIdentifiers>android-arm;android-arm64</RuntimeIdentifiers>
+		<AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
 		<!--
 			Enables trim analyzers and full trimming during Release mode.
 			To learn more, see: https://learn.microsoft.com/dotnet/core/deploying/trimming/trimming-options#trimming-granularity
