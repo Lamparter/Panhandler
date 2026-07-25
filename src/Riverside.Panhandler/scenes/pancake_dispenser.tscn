@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dwst7cnk7jkak"]
+
+[ext_resource type="PackedScene" uid="uid://vwuphwia2h3f" path="res://scenes/dispenser.tscn" id="1_vauum"]
+[ext_resource type="Script" uid="uid://byiysbo1gyvjj" path="res://scripts/PancakeDispenser.cs" id="2_jdcm8"]
+
+[node name="PancakeDispenser" unique_id=1045665151 instance=ExtResource("1_vauum")]
+script = ExtResource("2_jdcm8")

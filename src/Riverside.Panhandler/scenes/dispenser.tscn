@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://vwuphwia2h3f"]
+
+[ext_resource type="PackedScene" uid="uid://e65qsqbdqo5q" path="res://scenes/dispenser_shape.tscn" id="2_4ixav"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qmn7t"]
+size = Vector3(1, 0.6503906, 1)
+
+[node name="dispenser" type="Node3D" unique_id=1045665151]
+
+[node name="DispenserShape" parent="." unique_id=1696119844 instance=ExtResource("2_4ixav")]
+
+[node name="dispensed" type="Node3D" parent="." unique_id=1597047550]
+
+[node name="DispenserArea" type="Area3D" parent="." unique_id=75671670]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DispenserArea" unique_id=1885499178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5396916, 0)
+shape = SubResource("BoxShape3D_qmn7t")
+
+[connection signal="body_entered" from="DispenserArea" to="." method="_OnBodyEntered"]
+[connection signal="body_exited" from="DispenserArea" to="." method="_OnBodyExited"]

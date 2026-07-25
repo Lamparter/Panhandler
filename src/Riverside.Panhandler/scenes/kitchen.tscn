@@ -1,27 +1,67 @@
 [gd_scene format=3 uid="uid://cy4tuhe61q6xl"]
 
+[ext_resource type="Script" uid="uid://cowgsu6jkis1q" path="res://scripts/Kitchen.cs" id="1_2b6py"]
 [ext_resource type="PackedScene" uid="uid://mgp02mkor0at" path="res://scenes/hand.tscn" id="1_vloss"]
 [ext_resource type="PackedScene" uid="uid://87mjqlpc521e" path="res://scenes/pancake.tscn" id="2_ipk1y"]
+[ext_resource type="PackedScene" uid="uid://dwst7cnk7jkak" path="res://scenes/pancake_dispenser.tscn" id="4_bems3"]
+[ext_resource type="PackedScene" uid="uid://s6ptsg1jpa24" path="res://scenes/liquid_dispenser.tscn" id="5_v3ycp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ipk1y"]
 
-[node name="Kitchen" type="Node3D" unique_id=1243928712]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mrp8g"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
-[node name="Stove" type="MeshInstance3D" parent="." unique_id=1732584394]
-mesh = SubResource("BoxMesh_ipk1y")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bems3"]
+
+[sub_resource type="Sky" id="Sky_v3ycp"]
+sky_material = SubResource("ProceduralSkyMaterial_bems3")
+
+[sub_resource type="Environment" id="Environment_bems3"]
+sky = SubResource("Sky_v3ycp")
+ambient_light_source = 3
+volumetric_fog_enabled = true
+
+[node name="Kitchen" type="Node3D" unique_id=1243928712]
+script = ExtResource("1_2b6py")
 
 [node name="Pancake" parent="." unique_id=1080411880 instance=ExtResource("2_ipk1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8345554, 1.7584045, -0.62098885)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2004445, 1.7584045, 0.3706919)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=284066822]
-transform = Transform3D(1, 0, 0, 0, 0.11907979, 0.9928847, 0, -0.9928847, 0.11907979, 0, 5, 0)
+transform = Transform3D(-1, 0, 0, 0, -0.1273252, 0.41964746, 0, 1.0616349, 0.050329644, 0, 5, 0)
 light_color = Color(1, 1, 0.72156864, 1)
-light_energy = 5.985
+light_energy = 7.287
+light_size = 0.115
+light_specular = 0.0
+spot_range = 8.151244
+spot_angle = 58.143116
 
 [node name="player" type="Node3D" parent="." unique_id=1086976477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65031075, 0.98622227)
 
 [node name="Camera3D" type="Camera3D" parent="player" unique_id=1274084394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34396172, 2.1192327, 2.6263633)
 
 [node name="Hand" parent="player" unique_id=2124337969 instance=ExtResource("1_vloss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2868646, 1.0246162, 1.4124736)
+
+[node name="floor" type="Node3D" parent="." unique_id=1534425616]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1186683516]
+
+[node name="mesh" type="MeshInstance3D" parent="StaticBody3D" unique_id=1732584394]
+transform = Transform3D(15.523294, 0, 0, 0, 0.27815145, 0, 0, 0, 7.8325934, 0, 0, 0)
+mesh = SubResource("BoxMesh_ipk1y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1738167747]
+transform = Transform3D(15.523294, 0, 0, 0, 0.27815145, 0, 0, 0, 7.8325934, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mrp8g")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=826477048]
+environment = SubResource("Environment_bems3")
+
+[node name="PancakeDispenser" parent="." unique_id=1045665151 instance=ExtResource("4_bems3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8210218, 3.5223966, -0.57086277)
+
+[node name="LiquidDispenser" parent="." unique_id=1264335689 instance=ExtResource("5_v3ycp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4700477, -1.8163035)

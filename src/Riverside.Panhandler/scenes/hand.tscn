@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mgp02mkor0at"]
 
-[ext_resource type="Script" uid="uid://ddchy5m0gwp60" path="res://scripts/HandController.cs" id="1_eyfoh"]
+[ext_resource type="Script" uid="uid://db2lpbpoxkver" path="res://scripts/HandController.cs" id="1_eyfoh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1gd3j"]
 
@@ -27,62 +27,66 @@ points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 
 
 [node name="Hand" type="Node3D" unique_id=2124337969]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1560899645]
+[node name="HandBody" type="CharacterBody3D" parent="." unique_id=1560899645]
 collision_mask = 2
 script = ExtResource("1_eyfoh")
 
-[node name="arm" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1328255663]
+[node name="arm" type="MeshInstance3D" parent="HandBody" unique_id=1328255663]
 transform = Transform3D(0.53816265, 0, 0, 0, -4.371139e-08, 0.53816265, 0, -1, -2.3523837e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_1gd3j")
 
-[node name="pan" type="Node3D" parent="CharacterBody3D" unique_id=285787971]
+[node name="pan" type="Node3D" parent="HandBody" unique_id=285787971]
 transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, 0, 0, 0)
 
-[node name="handle" type="MeshInstance3D" parent="CharacterBody3D/pan" unique_id=1320845132]
+[node name="handle" type="MeshInstance3D" parent="HandBody/pan" unique_id=1320845132]
 transform = Transform3D(0.09908987, 0, 0, 0, 0.34331387, 0, 0, 0, 0.09908987, 0, 1.2803006, 0)
 mesh = SubResource("CylinderMesh_1gd3j")
 
-[node name="bottom" type="MeshInstance3D" parent="CharacterBody3D/pan" unique_id=1783069801]
+[node name="bottom" type="MeshInstance3D" parent="HandBody/pan" unique_id=1783069801]
 transform = Transform3D(0.118840456, 0, 0, 0, 1, 0, 0, 0, 1, -0.4150735, 2.0505435, 0)
 mesh = SubResource("BoxMesh_eyfoh")
 
-[node name="walls" type="Node3D" parent="CharacterBody3D/pan" unique_id=612256631]
+[node name="walls" type="Node3D" parent="HandBody/pan" unique_id=612256631]
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/pan/walls" unique_id=1808191459]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="HandBody/pan/walls" unique_id=1808191459]
 transform = Transform3D(0.3497488, 0, 0, 0, -0.07766587, 0, 0, 0, 0.99999994, -0.19059005, 1.5608332, 0)
 mesh = SubResource("BoxMesh_cmdsa")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/pan/walls" unique_id=568154137]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HandBody/pan/walls" unique_id=568154137]
 transform = Transform3D(0.34974882, 0, 0, 0, -0.07766588, 0, 0, 0, 1, -0.19059005, 2.4982638, 0)
 mesh = SubResource("BoxMesh_cmdsa")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/pan/walls" unique_id=221928354]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="HandBody/pan/walls" unique_id=221928354]
 transform = Transform3D(0.3497488, 0, 0, 0, 3.3948833e-09, -0.9999999, 0, -0.07766587, -4.3711385e-08, -0.19059005, 2.0432708, 0.4500777)
 mesh = SubResource("BoxMesh_cmdsa")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D/pan/walls" unique_id=2042448278]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="HandBody/pan/walls" unique_id=2042448278]
 transform = Transform3D(0.3497488, 0, 0, 0, 3.3948833e-09, -0.9999999, 0, -0.07766587, -4.3711385e-08, -0.19059005, 2.0432708, -0.4563172)
 mesh = SubResource("BoxMesh_cmdsa")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D" unique_id=293800820]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HandBody" unique_id=293800820]
 transform = Transform3D(-1.5288006e-08, 0, -0.99999994, 0.34974882, 3.394883e-09, -4.3711385e-08, -1.5288007e-08, 0.07766587, 1.910685e-15, 8.330956e-09, -0.19059017, -2.4982636)
 shape = SubResource("ConvexPolygonShape3D_eyfoh")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1981888930]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="HandBody" unique_id=1981888930]
 transform = Transform3D(-1.5288004e-08, 0.077665865, 4.371138e-08, 0.3497488, 3.3948826e-09, 4.3711385e-08, -1.5288004e-08, -3.3948833e-09, 0.9999998, -0.45007768, -0.19059017, -2.0432708)
 shape = SubResource("ConvexPolygonShape3D_cmdsa")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="CharacterBody3D" unique_id=682642542]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="HandBody" unique_id=682642542]
 transform = Transform3D(-1.5288004e-08, 0.077665865, 4.371138e-08, 0.3497488, 3.3948826e-09, 4.3711385e-08, -1.5288004e-08, -3.3948833e-09, 0.9999998, 0.45631716, -0.19059013, -2.0432708)
 shape = SubResource("ConvexPolygonShape3D_k7pjy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1884694114]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandBody" unique_id=1884694114]
 transform = Transform3D(-1.5288006e-08, 0, -0.99999994, 0.3497488, 3.394883e-09, -4.3711385e-08, -1.5288006e-08, 0.07766587, 1.9106853e-15, 8.3309555e-09, -0.19059013, -1.5608332)
 shape = SubResource("ConvexPolygonShape3D_m1v21")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1082343032]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="HandBody" unique_id=1082343032]
 transform = Transform3D(-5.194681e-09, 0, -1, 0.118840456, -4.371139e-08, -4.371139e-08, -5.194681e-09, -1, 1.9106855e-15, 1.8143439e-08, -0.4150736, -2.0505435)
 shape = SubResource("ConvexPolygonShape3D_kdemd")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="HandBody" unique_id=355689157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017211914, -0.2062378, -2.0219715)
+size = Vector3(0.98461914, 0.61120605, 1.146698)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1545973187]
 transform = Transform3D(1, 0, 0, 0, 0.14703259, 0.9891316, 0, -0.9891316, 0.14703259, 0, 3.4293597, -0.42829943)

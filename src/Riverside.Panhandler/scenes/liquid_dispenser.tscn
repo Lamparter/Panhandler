@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://s6ptsg1jpa24"]
+
+[ext_resource type="PackedScene" uid="uid://vwuphwia2h3f" path="res://scenes/dispenser.tscn" id="1_b8tge"]
+[ext_resource type="Script" uid="uid://bmlpnbaikytyi" path="res://scripts/LiquidDispenser.cs" id="2_mkwbu"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b8tge"]
+spread = 180.0
+
+[sub_resource type="Gradient" id="Gradient_mkwbu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e1biy"]
+gradient = SubResource("Gradient_mkwbu")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hg6p"]
+transparency = 1
+blend_mode = 1
+albedo_texture = SubResource("GradientTexture2D_e1biy")
+proximity_fade_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_oiwi6"]
+material = SubResource("StandardMaterial3D_3hg6p")
+size = Vector2(0.2, 0.2)
+
+[node name="LiquidDispenser" unique_id=1045665151 instance=ExtResource("1_b8tge")]
+script = ExtResource("2_mkwbu")
+
+[node name="SubViewport" type="SubViewport" parent="." index="3" unique_id=1007399381]
+transparent_bg = true
+
+[node name="LiquidEmitter" type="GPUParticles3D" parent="SubViewport" index="0" unique_id=675137013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0186559, 0)
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_b8tge")
+draw_pass_1 = SubResource("QuadMesh_oiwi6")
