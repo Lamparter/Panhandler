@@ -43,9 +43,6 @@ shape = SubResource("BoxShape3D_268xe")
 transform = Transform3D(0.9914448, 0.1305262, -1.5565093e-09, 0, 1.1924881e-08, 0.99999994, 0.13052619, -0.9914449, 1.1822861e-08, -0.27212286, -0.49883765, -1.9776994)
 shape = SubResource("BoxShape3D_268xe")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1545973187]
-transform = Transform3D(1, 0, 0, 0, 0.14703259, 0.9891316, 0, -0.9891316, 0.14703259, 0, 3.4293597, -0.42829943)
-
 [node name="MotionTracker" type="Node" parent="." unique_id=132031381]
 script = ExtResource("2_cmdsa")
 metadata/_custom_type_script = "uid://ccsic5fc6micm"
