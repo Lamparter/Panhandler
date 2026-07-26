@@ -37,7 +37,7 @@ transform = Transform3D(0.53816265, 0, 0, 0, -4.371139e-08, 0.53816265, 0, -1, -
 mesh = SubResource("CapsuleMesh_1gd3j")
 
 [node name="pan" type="Node3D" parent="HandBody" unique_id=285787971]
-transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, 0, 0, 0)
+transform = Transform3D(1, 0, 4.371139e-08, -4.371139e-08, 1.9106855e-15, 1, 0, -1, 1.9106855e-15, 0, 0, 0)
 
 [node name="handle" type="MeshInstance3D" parent="HandBody/pan" unique_id=1320845132]
 transform = Transform3D(0.09908987, 0, 0, 0, 0.34331387, 0, 0, 0, 0.09908987, 0, 1.2803006, 0)
